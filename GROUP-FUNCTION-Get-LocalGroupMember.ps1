@@ -25,7 +25,7 @@
             Name: Get-LocalGroupMember
             Date Created: 22 JAN 2013
             Last Modified: 22 JAN 2013
-                Version 1.0 - Initial Creation            
+                Version 1.0 - Initial Creation
 
         .EXAMPLE
             Get-LocalGroupMember -ValidMember "Administrator","Domain Admins"
@@ -37,7 +37,7 @@
 
             Description
             -----------
-            Script run using default parameters of localhost for computername to search for local 
+            Script run using default parameters of localhost for computername to search for local
             Administrators group with a default set excluded members.
 
         .EXAMPLE
@@ -56,7 +56,7 @@
 
             Description
             -----------
-            Script run using default parameters of localhost for computername to search for local 
+            Script run using default parameters of localhost for computername to search for local
             Administrators group with a default set excluded members.
     #>
 
@@ -84,20 +84,20 @@
                 [switch]$Wait
             )
             Do {
-                $more = $false         
+                $more = $false
                 Foreach($runspace in $runspaces) {
                     If ($runspace.Runspace.isCompleted) {
                         $runspace.powershell.EndInvoke($runspace.Runspace)
                         $runspace.powershell.dispose()
                         $runspace.Runspace = $null
-                        $runspace.powershell = $null                 
+                        $runspace.powershell = $null
                     } ElseIf ($runspace.Runspace -ne $null) {
                         $more = $true
                     }
                 }
                 If ($more -AND $PSBoundParameters['Wait']) {
                     Start-Sleep -Milliseconds 100
-                }   
+                }
                 #Clean out unused runspace jobs
                 $temphash = $runspaces.clone()
                 $temphash | Where {
@@ -105,11 +105,11 @@
                 } | ForEach {
                     Write-Verbose ("Removing {0}" -f $_.computer)
                     $Runspaces.remove($_)
-                }             
+                }
             } while ($more -AND $PSBoundParameters['Wait'])
         }
         #endregion Functions
-    
+
         #region Splat Tables
         #Define hash table for Get-RunspaceData function
         $runspacehash = @{}
@@ -157,7 +157,7 @@
                 }
             } Else {
                 Write-Warning ("{0}: Unable to connect!" -f $Computer)
-            }           
+            }
         }
         #endregion ScriptBlock
 
@@ -165,43 +165,43 @@
         Write-Verbose ("Creating runspace pool and session states")
         $sessionstate = [system.management.automation.runspaces.initialsessionstate]::CreateDefault()
         $runspacepool = [runspacefactory]::CreateRunspacePool(1, $Throttle, $sessionstate, $Host)
-        $runspacepool.Open()  
-        
+        $runspacepool.Open()
+
         Write-Verbose ("Creating empty collection to hold runspace jobs")
-        $Script:runspaces = New-Object System.Collections.ArrayList        
+        $Script:runspaces = New-Object System.Collections.ArrayList
         #endregion Runspace Creation
     }
     Process {
         ForEach ($Computer in $Computername) {
-            #Create the powershell instance and supply the scriptblock with the other parameters 
+            #Create the powershell instance and supply the scriptblock with the other parameters
             $powershell = [powershell]::Create().AddScript($scriptBlock).AddArgument($computer).AddArgument($Group).AddArgument($ValidMember).AddArgument($testConnectionHash)
-           
+
             #Add the runspace into the powershell instance
             $powershell.RunspacePool = $runspacepool
-           
+
             #Create a temporary collection for each runspace
             $temp = "" | Select-Object PowerShell,Runspace,Computer
             $Temp.Computer = $Computer
             $temp.PowerShell = $powershell
-           
+
             #Save the handle output when calling BeginInvoke() that will be used later to end the runspace
             $temp.Runspace = $powershell.BeginInvoke()
             Write-Verbose ("Adding {0} collection" -f $temp.Computer)
             $runspaces.Add($temp) | Out-Null
-           
+
             Write-Verbose ("Checking status of runspace jobs")
-            Get-RunspaceData @runspacehash        
+            Get-RunspaceData @runspacehash
         }
     }
     End {
         Write-Verbose ("Finish processing the remaining runspace jobs: {0}" -f (@(($runspaces | Where {$_.Runspace -ne $Null}).Count)))
         $runspacehash.Wait = $true
         Get-RunspaceData @runspacehash
-    
+
         #region Cleanup Runspace
         Write-Verbose ("Closing the runspace pool")
-        $runspacepool.close()  
-        $runspacepool.Dispose() 
+        $runspacepool.close()
+        $runspacepool.Dispose()
         #endregion Cleanup Runspace
-    } 
+    }
 }
