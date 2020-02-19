@@ -11,6 +11,6 @@ Foreach ($server in $list)
     Get-RemoteProgram -ComputerName $Server -Property DisplayVersion | findstr Sentinel
 }
 
-#Get-RemoteProgram -ComputerName \\HOSTNAME.rlcorp.local -Property DisplayVersion | findstr Sentinel
+#Get-RemoteProgram -ComputerName \\HOSTNAME.DomainName -Property DisplayVersion | findstr Sentinel
 
 #psshutdown \\$server -r -e p:4:2
