@@ -1,4 +1,4 @@
-#REQUIRES THE GET-REMOTEPROGRAM.PSM1
+# REQUIRES THE GETREMOTEPROGRAM FUNCTION
 $ErrorActionPreference = 'silentlycontinue'
 
 Import-Module -Name C:\Temp\Modules\Get-RemoteProgram -verbose
@@ -11,4 +11,3 @@ Foreach ($computer in $list)
   Get-RemoteProgram -ComputerName $computer -Property DisplayVersion | findstr Sentinel
 
   }
- 

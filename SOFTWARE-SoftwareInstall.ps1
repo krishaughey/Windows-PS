@@ -1,12 +1,16 @@
+# Remotely installs software using XCOPY and PSEXEC
+# REQUIRES the FUNCTION "SOFTWARE-FUNTION-GetRemoteProgram"
+Import-Module -Name C:\Temp\SOFTWARE-FUNTION-GetRemoteProgram.ps1 -verbose
+
 $ErrorActionPreference= 'silentlycontinue'
 $list = (Get-Content C:\Temp\NoS1AgentTEST.txt)
 
 Foreach ($server in $list)
 {
-    xcopy \\padm075\c$\Temp\SentinelAgent_windows_v3_2_4_54.exe \\$server\c$\Temp\ /Y /D
+    xcopy \\FileServer\c$\Temp\InstallFileName.exe \\$server\c$\Temp\ /Y /D
     #Start-Sleep -s 10
 
-    psexec \\$server "c:\Temp\SentinelAgent_windows_v3_2_4_54.exe" /q /NOUI /norestart /SITE_TOKEN=eyJ1cmwiOiAiaHR0cHM6Ly9nYW5uZXR0LnNlbnRpbmVsb25lLm5ldCIsICJzaXRlX2tleSI6ICI2YjlmZmQxMTMzMmQ2N2FiIn0=
+    psexec \\$server "c:\Temp\InstallFileName.exe" /q /NOUI /norestart
 
     Get-RemoteProgram -ComputerName $Server -Property DisplayVersion | findstr Sentinel
 }
