@@ -18,6 +18,9 @@
 ##### List all items within a folder
     Get-ChildItem – Force
 
+##### Get the Up Time of a remote server
+    (Get-Date) - (Get-CimInstance Win32_OperatingSystem -ComputerName TS02).LastBootupTime
+
 ##### Recurse over a series of directories or folders
     Get-ChildItem –Force \\<ServerName>\<PathName> –Recurse
 
@@ -81,5 +84,5 @@
     enter-pssession <ServerName>
 
 ##### Use the PowerShell invoke command to run a script on a remote servers
-    invoke-command -computername <ServerName>, <ServerName02> -filepath \\<ServerName>
-    <PATH>\<FileName>.ps1
+    invoke-command -computername <ServerName>, <ServerName02> -ScriptBlock {get-process}
+    
