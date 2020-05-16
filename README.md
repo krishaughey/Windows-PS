@@ -2,8 +2,8 @@
 ## QUICK REFERENCE
 ![PowerShell](https://repository-images.githubusercontent.com/221074232/158c2480-5262-11ea-8af0-452a86d9e56d)
 
-**Simple Timestamp Variable**
->$timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
+##### Simple Timestamp Variable
+> $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
 ##### Find the five processes using the most memory
@@ -85,4 +85,3 @@
 
 ##### Use the PowerShell invoke command to run a script on a remote servers
     invoke-command -computername <ServerName>, <ServerName02> -ScriptBlock {get-process}
-    
