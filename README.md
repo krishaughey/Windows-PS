@@ -6,7 +6,7 @@
 > $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
-##### Find the five processes using the most memory
+##### Get the five processes using the most memory
     ps | sort –p ws | select –last 5
 
 ##### Stop a process by name
@@ -15,7 +15,10 @@
 ##### Cycle a service
     Restart-Service <ServiceName>
 
-##### List all items within a folder
+##### Get Service Accounts
+    Get-WMIObject Win32_Service -filter "startname='domain\\username'"
+
+##### Get all items within a folder
     Get-ChildItem – Force
 
 ##### Get the Up Time of a remote server
@@ -27,7 +30,7 @@
 ##### Remove all files within a directory without being prompted for each
     Remove-Item <PATH> –Recurse
 
-## Gather WMI Object Data
+## Get WMI Object Data
 ##### Restart the current computer
     (Get-WmiObject -Class Win32_OperatingSystem -ComputerName .).Win32Shutdown(2)
 
@@ -43,7 +46,7 @@
 ##### Get the username of the person currently logged on to a computer
     Get-WmiObject -Class Win32_ComputerSystem -Property UserName -ComputerName .
 
-##### Find just the names of installed applications on the current computer
+##### Get installed applications on the current computer
     Get-WmiObject -Class Win32_Product -ComputerName . | Format-Wide -Column 1
 
 ##### Get IP addresses assigned to the current computer
@@ -52,7 +55,7 @@
 ##### Get a more detailed IP configuration report for the current machine
     Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=TRUE -ComputerName . | Select-Object -Property [a-z]* -ExcludeProperty IPX*,WINS*
 
-##### Find network cards with DHCP enabled on the current computer
+##### Get network cards with DHCP enabled on the current computer
     Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter "DHCPEnabled=true" -ComputerName .
 
 ##### Enable DHCP on all network adapters on the current computer
