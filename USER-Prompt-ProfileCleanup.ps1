@@ -8,4 +8,4 @@ icacls \\$Computer\c$\Users\*.* /T /grant administrators:F
 
 Get-ChildItem -Path "\\$Computer\c$\Users\" -Directory | where {$_.LastWriteTime -le $(get-date).Adddays(-$days)} | Remove-Item -recurse
 
-invoke-command -scriptblock {dir -Include build -Depth 1} | where {$_.LastWriteTime -le $(get-date).Adddays(-$180)} | Remove-Item -recurse -Force -whatif
+#invoke-command -scriptblock {dir -Include build -Depth 1} | where {$_.LastWriteTime -le $(get-date).Adddays(-$days)} | Remove-Item -recurse -Force -whatif
