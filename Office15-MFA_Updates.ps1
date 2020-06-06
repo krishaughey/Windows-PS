@@ -1,8 +1,9 @@
 ## Get Outlook Version
 ##### Get Outlook Version for files needed for Modern Authentication (MFA)
-$TimeStamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
+##### author: Kristopher F. Haughey
 $ErrorActionPreference = 'silentlycontinue'
 #Create the log
+$TimeStamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 Function LogWrite
 {
 Param ([string]$logstring)
