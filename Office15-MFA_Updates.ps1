@@ -27,7 +27,7 @@ $outlookMin = "15.0.4625.1000"
 if ([string]::IsNullOrEmpty($ADAL)){
   LogWrite "file ADAL.dll not found"
 }elseif ($ADAL.FileVersion -lt $adalMin){
-  Start-Process "\\CARD.com\SysVol\CARD.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\ADAL.exe" -ArgumentList "/q"
+  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\ADAL.exe" -ArgumentList "/q"
   LogWrite "Installing ADAL.dll update"
 }else {LogWrite "ADAL.dll meets/exceeds the minimum version. No update required"}
 
@@ -35,7 +35,7 @@ if ([string]::IsNullOrEmpty($ADAL)){
 if ([string]::IsNullOrEmpty($CSI)){
   LogWrite "file CSI.dll not found"
 }elseif ($CSI.FileVersion -lt $csiMin){
-  Start-Process "\\CARD.com\SysVol\CARD.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\CSI.exe" -ArgumentList "/q" -NoNewWindow -Wait
+  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\CSI.exe" -ArgumentList "/q" -NoNewWindow -Wait
   LogWrite "Installing CSI.dll update"
 }else {LogWrite "CSI.dll meets/exceeds the minimum version. No update required"}
 
@@ -43,7 +43,7 @@ if ([string]::IsNullOrEmpty($CSI)){
 if ([string]::IsNullOrEmpty($MSO)){
   LogWrite "file MSO.dll not found"
 }elseif ($MSO.FileVersion -lt $msoMin){
-  Start-Process "\\CARD.com\SysVol\CARD.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\MSO.exe" -ArgumentList "/q" -NoNewWindow -Wait
+  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\MSO.exe" -ArgumentList "/q" -NoNewWindow -Wait
   LogWrite "Installing MSO.dll update"
 }else {LogWrite "MSO.dll meets/exceeds the minimum version. No update required"}
 
@@ -51,7 +51,7 @@ if ([string]::IsNullOrEmpty($MSO)){
 if ([string]::IsNullOrEmpty($Outlook)){
   LogWrite "file Outlook.exe not found"
 }elseif ($Outlook.FileVersion -lt $outlookMin){
-  Start-Process "\\CARD.com\SysVol\CARD.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\Outlook.exe" -ArgumentList "/q" -NoNewWindow -Wait
+  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\Outlook.exe" -ArgumentList "/q" -NoNewWindow -Wait
   LogWrite "Installing Outlook.exe update"
 }else {LogWrite "Outlook.exe meets/exceeds the minimum version. No update required"}
 
