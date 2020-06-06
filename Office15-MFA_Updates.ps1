@@ -12,7 +12,7 @@ Add-content $Logfile -value $logstring
 $Logfile = "c:\Windows\Logs\Outlook-ADAL_Update.log"
 LogWrite "Script Start= $TimeStamp"
 
-#Get the Version Info from all 4 files
+#Set the variables
 $ADAL = (Get-ItemProperty "C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE15\adal.dll").VersionInfo
 $CSI = (Get-ItemProperty "C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE15\csi.dll").VersionInfo
 $MSO = (Get-ItemProperty "C:\Program Files (x86)\Common Files\Microsoft Shared\OFFICE15\mso.dll").VersionInfo
