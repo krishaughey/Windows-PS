@@ -27,7 +27,7 @@ $outlookMin = "15.0.4625.1000"
 if ([string]::IsNullOrEmpty($ADAL)){
   LogWrite "file ADAL.dll not found"
 }elseif ($ADAL.FileVersion -lt $adalMin){
-  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\ADAL.exe" -ArgumentList "/q"
+  Start-Process "\\DomainName.com\SysVol\DomainName.com\Policies\{D31AB378-BFB4-49AC-9EEF-64E8235F1DB3}\Machine\Scripts\Startup\ADAL.exe" -ArgumentList "/q" -NoNewWindow -Wait
   LogWrite "Installing ADAL.dll update"
 }else {LogWrite "ADAL.dll meets/exceeds the minimum version. No update required"}
 
