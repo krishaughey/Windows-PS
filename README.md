@@ -6,6 +6,10 @@
 > $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
+
+##### Get OS Version number, build, and revision
+    ` [System.Environment]::OSVersion.Version `
+
 ##### Get the five processes using the most memory
     ps | sort –p ws | select –last 5
 
