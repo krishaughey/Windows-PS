@@ -7,6 +7,9 @@
 
 ## General
 
+##### Get all Volume ID
+    GWMI -namespace root\cimv2 -class win32_volume | FL -property DriveLetter, DeviceID
+
 ##### Get OS Version number, build, and revision
     ` [System.Environment]::OSVersion.Version `
 
