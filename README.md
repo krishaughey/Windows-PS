@@ -7,6 +7,9 @@
 
 ## General
 
+##### Get Installed Windows Updates
+	get-wmiobject -class win32_quickfixengineering
+
 ##### Get all Volume ID
     GWMI -namespace root\cimv2 -class win32_volume | FL -property DriveLetter, DeviceID
 
