@@ -15,6 +15,9 @@
 
 ##### Get OS Version number, build, and revision
     ` [System.Environment]::OSVersion.Version `
+	
+##### Get BIOS Information
+	gwmi -class WIN32_Bios
 
 ##### Get the five processes using the most memory
     ps | sort –p ws | select –last 5
