@@ -6,6 +6,8 @@
 > $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
+##### Get Service (no disabled, no LocalSystem acct)
+    get-wmiobject win32_service | where {$_.StartName -ne "LocalSystem" -and $_.StartMode -ne "Disabled"} | format-table Name,DisplayName,State,StartMode,StartName
 
 ##### Get Installed Windows Updates
 	get-wmiobject -class win32_quickfixengineering
@@ -22,26 +24,14 @@
 ##### Get the five processes using the most memory
     ps | sort –p ws | select –last 5
 
-##### Stop a process by name
-    Stop-Process -processname <ProcessName*>
-
-##### Cycle a service
-    Restart-Service <ServiceName>
-
 ##### Get Service Accounts
     Get-WMIObject Win32_Service -filter "startname='domain\\username'"
-
-##### Get all items within a folder
-    Get-ChildItem – Force
 
 ##### Get the Up Time of a remote server
     (Get-Date) - (Get-CimInstance Win32_OperatingSystem -ComputerName TS02).LastBootupTime
 
 ##### Recurse over a series of directories or folders
     Get-ChildItem –Force \\<ServerName>\<PathName> –Recurse
-
-##### Remove all files within a directory without being prompted for each
-    Remove-Item <PATH> –Recurse
 
 ## Get WMI Object Data
 ##### Restart the current computer
@@ -75,7 +65,6 @@
     Get-WmiObject -Class Win32_NetworkAdapterConfiguration -Filter IPEnabled=true -ComputerName . | ForEach-Object -Process {$_.EnableDHCP()}
 
 ## Software management
-
 ##### Install an MSI package on a remote computer
     (Get-WMIObject -ComputerName TARGETMACHINE -List | Where-Object -FilterScript {$_.Name -eq "Win32_Product"}).Install(\\<ServerName>\<PATH>\<FileName>.msi)
 
@@ -86,7 +75,6 @@
     (Get-WmiObject -Class Win32_Product -Filter "Name='<PackageName>'" -ComputerName . ).Uninstall()
 
 ## Machine management
-
 ##### Remotely shut down another machine after one minute
     Start-Sleep 60; Restart-Computer –Force –ComputerName <ServerName>
 
@@ -95,9 +83,3 @@
 
 ##### Remove a printer
     (New-Object -ComObject WScript.Network).RemovePrinterConnection("\\<ServerName>\<PrinterName>")
-
-##### Enter into a remote PowerShell session -- you must have remote management enabled
-    enter-pssession <ServerName>
-
-##### Use the PowerShell invoke command to run a script on a remote servers
-    invoke-command -computername <ServerName>, <ServerName02> -ScriptBlock {get-process}
