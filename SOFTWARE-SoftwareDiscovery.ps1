@@ -1,10 +1,12 @@
 # REQUIRES THE GETREMOTEPROGRAM FUNCTION
 #$ErrorActionPreference = 'silentlycontinue'
-$Module = Read-Host -Input "enter the module 'GetRemotProgram path'"
-Import-Module -Name $Module -Verbose
-$list = (Get-Content C:\Temp\ServList.txt)
-
-Foreach ($computer in $list)
-{
-  Get-RemoteProgram -ComputerName $computer -Property DisplayVersion | findstr Sentinel
-  }
+Import-Module "c:\Temp\Scripts\Modules\SOFTWARE-FUNCTION-GetRemoteProgram.ps1"
+$colItems = get-adcomputer -Filter 'operatingsystem -like "*server*" -and enabled -eq "true"' -SearchBase "OU=Servers,DC=CARD,DC=COM"| Select-Object Name
+$Array = @()
+foreach ($S in $colItems) {
+	Get-RemoteProgram -computername $S.Name -IncludeProgram 'Sophos Endpoint Agent'
+  $Array += New-Object PSObject -Property ( [ordered]@{
+      'ComputerName' = $Server
+      'KeyPath' = $KeyValue.ProgramName } )
+}
+$Array | Export-CSV c:\Temp\SophosAgentInstall.csv -NoTypeInformation
