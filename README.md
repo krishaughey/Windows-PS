@@ -9,6 +9,9 @@
 ##### Get Service (no disabled, no LocalSystem acct)
     get-wmiobject win32_service | where {$_.StartName -ne "LocalSystem" -and $_.StartMode -ne "Disabled"} | format-table Name,DisplayName,State,StartMode,StartName
 
+##### Get Running Services
+    gsv | where {$_.Status -eq "Running"}
+
 ##### Get Installed Windows Updates
 	get-wmiobject -class win32_quickfixengineering
 
