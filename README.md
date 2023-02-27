@@ -6,6 +6,9 @@
 > $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
+##### Get text string from multiple files in directory
+    Get-ChildItem .\ *.* -R | Select-String <string>
+    
 ##### Get Service (no disabled, no LocalSystem acct)
     get-wmiobject win32_service | where {$_.StartName -ne "LocalSystem" -and $_.StartMode -ne "Disabled"} | format-table Name,DisplayName,State,StartMode,StartName
 
