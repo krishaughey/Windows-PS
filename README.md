@@ -9,6 +9,9 @@
 ##### Get text string from multiple files in directory
     Get-ChildItem .\ *.* -R | Select-String <string>
 
+##### Combine Multiple CSV files
+    Get-ChildItem -Filter *.csv | Import-Csv | Export-Csv .\merged.csv -NoTypeInformation -Append
+
 ##### Copy Files from Remote Computer via WinRM/PSSession
     Copy-Item -FromSession (New-PSSession –ComputerName <REMOTE HOSTNAME> -Credential Get-Credential) -Path "<REMOTE HOSTNAME\FILE>" -destination <LOCAL PATH>
     
