@@ -10,11 +10,10 @@
     cmdkey /list
 
 >Currently stored credentials:
-
->Target: LegacyGeneric:target=adm-khaughey-arbonnewest.com
->Type: Generic
->User: arbonnewest.com\adm-khaughey
->Saved for this logon only
+Target: LegacyGeneric:target=adm-khaughey-arbonnewest.com
+Type: Generic
+User: arbonnewest.com\adm-khaughey
+Saved for this logon only
 
 >Target: LegacyGeneric:target=adm-khaughey-arbonne.aws
 >Type: Generic
