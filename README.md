@@ -6,6 +6,25 @@
 > $timestamp = Get-Date -Format s | ForEach-Object { $_ -replace ":", "." }
 
 ## General
+##### Clear Stored Credentials
+    cmdkey /list
+
+Currently stored credentials:
+
+    Target: LegacyGeneric:target=adm-khaughey-arbonnewest.com
+    Type: Generic
+    User: arbonnewest.com\adm-khaughey
+    Saved for this logon only
+
+    Target: LegacyGeneric:target=adm-khaughey-arbonne.aws
+    Type: Generic
+    User: arbonne.aws\adm-khaughey
+    Saved for this logon only
+
+    cmdkey /delete:adm-khaughey-arbonnewest.com
+
+CMDKEY: Credential deleted successfully.
+
 ##### Get text string from multiple files in directory
     Get-ChildItem .\ *.* -R | Select-String <string>
 
