@@ -4,7 +4,7 @@
 
 ### Check for Splunk Service and Process
 $ServiceCheck = Get-Service SplunkForwarder
-if ($ServiceCheck -ne $Null) {
+if ($Null -ne $ServiceCheck) {
 
     ### Stop and Delete Service
     Stop-Service SplunkForwarder
