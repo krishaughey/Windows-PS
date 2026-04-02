@@ -11,18 +11,12 @@
 
 > Currently stored credentials:
 > 
-> Target: LegacyGeneric:target=adm-khaughey-arbonnewest.com
+> Target: LegacyGeneric:target=<USER>-<DOMAIN>
 > Type: Generic
-> User: arbonnewest.com\adm-khaughey
-> Saved for this logon only
->
-> Target: LegacyGeneric:target=adm-khaughey-arbonne.aws
-> Type: Generic
-> User: arbonne.aws\adm-khaughey
+> User: <DOMAIN>\<USER>
 > Saved for this logon only
 
-    cmdkey /delete:adm-khaughey-arbonnewest.com
-
+    cmdkey /delete:<USER>-<DOMAIN>
 > CMDKEY: Credential deleted successfully.
 
 ##### Get text string from multiple files in directory
